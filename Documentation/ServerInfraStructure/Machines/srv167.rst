@@ -1,0 +1,22 @@
+================
+srv167.typo3.org
+================
+
+Facts:
+
+IP
+   10.186.2.167, srv167.typo3.org
+
+Login message
+   This is srv167, a server in the production environment.
+   Chef run list: recipe[t3-base]
+
+Initial provisioning
+   See `t3-base cookbook <https://github.com/TYPO3-cookbooks/t3-base>`__
+
+   This includes creating users and providing the public SSH key in the :file:`authorized_keys` file.
+
+   .. important::
+
+      On the other hand the Chef cookbook does not touch users that have been created
+      otherwise and that Chef doesn't know about.

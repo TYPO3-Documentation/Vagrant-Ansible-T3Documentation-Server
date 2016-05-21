@@ -15,6 +15,7 @@ new architecture. This has implications for all community members that need to
 access any servers via SSH or responsible for a service that requires incoming
 connections.
 
+
 Summary
 =======
 
@@ -106,13 +107,13 @@ Please don't duplicate them in your application.
 
 -  Refer to https://www.ssllabs.com/
 
--  See the `"add_header" section <https://github.com/TYPO3-cookbooks/site-proxytypo3org/search?utf8=%E2%9C%93&q=add_header`__
+-  See the `"add_header" section <https://github.com/TYPO3-cookbooks/site-proxytypo3org/search?utf8=%E2%9C%93&q=add_header>`__
    in the `Chef cookbook <https://github.com/TYPO3-cookbooks/site-proxytypo3org>`__
 
 -  Make sure that your application logs the correct end-user's IP address.
-   Respect the usual proxy headers (see the
+   Respect the usual proxy headers. See the
    `"proxy_set_header" part <https://github.com/TYPO3-cookbooks/site-proxytypo3org/search?utf8=%E2%9C%93&q=proxy_set_header>`__
-   of the `Chef cookbook <https://github.com/TYPO3-cookbooks/site-proxytypo3org>`__).
+   of the `Chef cookbook <https://github.com/TYPO3-cookbooks/site-proxytypo3org>`__.
 
 
 
@@ -120,3 +121,13 @@ Public Access to non-HTTP Ports
 ===============================
 
 TCP services that are not based on HTTP (for example Git) can be forwarded too.
+
+
+Machines
+========
+.. toctree::
+   :glob:
+   :hidden:
+
+   Machines/*
+
