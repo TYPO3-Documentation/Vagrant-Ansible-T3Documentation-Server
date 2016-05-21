@@ -1,0 +1,24 @@
+---
+
+- name: hg fetch bitbucket.org/birkenfeld/pygments-main
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  hg: >
+    repo=https://bitbucket.org/birkenfeld/pygments-main
+    dest={{ renderadmin_repositories_path }}/bitbucket.org/birkenfeld/pygments-main
+
+- name: hg bitbucket.org/xperseguers/sphinx-contrib
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  hg: >
+    repo=https://bitbucket.org/xperseguers/sphinx-contrib
+    dest={{renderadmin_repositories_path}}/bitbucket.org/xperseguers/sphinx-contrib
+
+- name: git https://github.com/TYPO3-Documentation/TYPO3CMS-Reference-CoreApi
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  git: >
+    repo=https://github.com/TYPO3-Documentation/TYPO3CMS-Reference-CoreApi
+    dest={{renderadmin_repositories_path}}/github.com/TYPO3-Documentation/TYPO3CMS-Reference-CoreApi
+
+

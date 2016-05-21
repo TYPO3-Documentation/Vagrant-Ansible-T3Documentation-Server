@@ -1,0 +1,13 @@
+# these settings apply to hosts of group 'dev'
+
+main_dev_helloworld: Hello world to all 'dev' hosts!
+
+main_apt_cache_ttl: 86400
+
+# 192.168.85.10
+main_hostname: docs.typo3.org.local
+#main_domain: "{{ main_hostname }}"
+main_from_email: no-reply@{{ main_domain }}
+
+
+_env: dev  # undefined | dev | prod

@@ -1,0 +1,30 @@
+---
+
+# see https://galaxy.ansible.com/elao/ohmyzsh/
+
+# modification: changeshell!
+
+
+elao_ohmyzsh_users:
+
+  - user: root
+    changeshell: no
+    template: users/{{ _env }}.j2
+    config:
+      - ZSH_THEME: elao-prod  # elao-{{ _env }}
+      - plugins: (git debian common-aliases history history-substring-search jump z)
+
+  - user: sphinx
+    changeshell: no
+    template: users/{{ _env }}.j2
+    config:
+      - ZSH_THEME: elao-prod  # elao-{{ _env }}
+      - plugins: (git debian common-aliases history history-substring-search jump z)
+
+  - user: vagrant
+    changeshell: no
+    template: users/{{ _env }}.j2
+    config:
+      - ZSH_THEME: elao-prod  # elao-{{ _env }}
+      - plugins: (git debian common-aliases history history-substring-search jump z)
+

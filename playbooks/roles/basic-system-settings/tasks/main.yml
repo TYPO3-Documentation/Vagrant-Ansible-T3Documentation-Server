@@ -1,0 +1,28 @@
+---
+
+- name: update apt packages lists
+  apt: update_cache=yes cache_valid_time={{main_apt_cache_ttl}}
+
+# Web documents are owned by group 'htdocs'
+- group: name=htdocs state=present
+
+- name: Add webserver 'www-data' to group 'htdocs'
+  user: >
+    name=www-data
+    groups=htdocs
+    append=yes
+
+
+- name: activate pam_umask
+  lineinfile: >
+    dest='/etc/pam.d/common-session'
+    line='session optional pam_umask.so'
+    regexp='^\w*session\w+optional\w+pam_umask.so\w*$'
+    insertafter=EOF
+    state=present
+
+- name: set umask 002 in GECOS for user www-data
+  command: chfn --other='umask=002' www-data
+
+
+

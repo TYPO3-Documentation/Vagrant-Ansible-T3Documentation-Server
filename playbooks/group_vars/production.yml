@@ -1,0 +1,11 @@
+# these settings apply to hosts of group 'production'
+
+main_production_helloworld: Hello world to 'production' hosts!
+
+_env: prod  # undefined | dev | prod
+
+# vpn to 10.186.2.167
+main_hostname: docs.typo3.org.remote
+main_domain: "{{ main_hostname }}"
+main_from_email: no-reply@{{ main_domain }}
+

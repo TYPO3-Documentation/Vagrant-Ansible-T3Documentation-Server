@@ -1,0 +1,30 @@
+# these settings apply to all hosts
+
+main_all_helloworld: Hello world to 'all' hosts!
+
+_env: undefined  # undefined | dev | prod
+
+main_apt_cache_ttl: 3600
+
+location_of_python_module__mysql: False
+location_of_python_module_MySQLdb: False
+location_of_python_module_pygments: False
+
+# to be overridden
+main_hostname: undefined.somwhere
+main_domain: "{{ main_hostname }}"
+main_from_email: no-reply@{{ main_domain }}
+
+
+main_title: TYPO3 Documentation Server
+# admin_name: "Xavier Perseguers"
+# admin_email: "xavier@typo3.org"
+
+
+# sphinx_virtualenv: "/opt/local/sphinx"
+# sphinx_git_directory: "/srv/sphinx/git-clones"
+# sphinx_version: 1.3.1
+#
+doc_render_workdir: "/home/sphinx/render-work"
+doc_projects: "/home/sphinx/projects"
+

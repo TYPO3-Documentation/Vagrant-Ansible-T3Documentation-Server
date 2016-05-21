@@ -1,0 +1,13 @@
+
+Host docs-typo3-org-local
+  HostName docs.typo3.org.local
+  User vagrant
+  Port 22
+  IdentityFile /home/marble/htdocs/Vagrant-Ansible-T3Documentation-Server/.vagrant/machines/default/virtualbox/private_key
+
+Host docs-typo3-org-remote
+  HostName docs.typo3.org.remote
+  User vagrant
+  Port 22
+  IdentityFile /home/marble/htdocs/Vagrant-Ansible-T3Documentation-Server/.vagrant/machines/default/virtualbox/private_key
+

@@ -1,0 +1,33 @@
+---
+
+- name: ensure user
+  user:
+    name={{renderadmin_user}}
+    comment="render admin"
+    state=present
+    home=/home/{{renderadmin_user}}
+    createhome=yes
+    group={{renderadmin_user}}
+    groups=htdocs
+    append=yes
+    shell=/bin/bash
+
+- name: set filemode for user {{renderadmin_user}}
+  file:
+    path: /home/{{renderadmin_user}}
+    mode: g+rws
+    recurse: no
+
+
+# http://stackoverflow.com/questions/10220531/how-to-set-system-wide-umask
+
+- name: set umask 002 in GECOS for user {{renderadmin_user}}
+  command: chfn --other='umask=002' {{renderadmin_user}}
+
+- name: activate pam_umask
+  lineinfile: >
+    dest='/etc/pam.d/common-session'
+    line='session optional pam_umask.so'
+    regexp='^\w*session\w+optional\w+pam_umask.so\w*$'
+    insertafter=EOF
+    state=present

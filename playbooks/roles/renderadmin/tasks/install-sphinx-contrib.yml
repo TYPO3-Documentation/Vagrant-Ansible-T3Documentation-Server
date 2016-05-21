@@ -1,0 +1,18 @@
+---
+
+- name: shell install sphinx-contrib from setup.py
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  shell: >
+    source {{ renderadmin_venv_path }}/bin/activate;
+    cd {{ renderadmin_repositories_path }}/bitbucket.org/xperseguers/sphinx-contrib/{{item}};
+    python setup.py install
+  args:
+    executable: /bin/bash
+  with_items:
+    - googlechart
+    - googlemaps
+    - httpdomain
+    - numfig
+    - slide
+    - youtube

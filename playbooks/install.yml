@@ -1,0 +1,38 @@
+---
+
+# https://www.theodo.fr/blog/2015/10/best-practices-to-build-great-ansible-playbooks/
+# http://blog.cliffano.com/2014/04/06/human-readable-ansible-playbook-log-output-using-callback-plugin/
+
+- name: install the TYPO3 Documentation Server
+  hosts: all
+  become: yes
+  vars_files:
+    - vars/main.yml
+    - vars/ohmyzsh.yml
+  roles:
+    - role: basic-system-settings
+    - role: community/bobbyrenwick.pip
+    - role: debian-apt
+    - role: debian-apt-latex
+    - role: global-pip-modules
+    - role: locate-python-modules
+
+    - role: renderadmin
+      renderadmin_user: sphinx
+
+
+
+
+    - role: community/geerlingguy.postfix
+
+    - role: community/geerlingguy.jenkins
+      jenkins_http_port: 8580
+
+    - role: elao.ohmyzsh
+    - role: nginx
+
+  tasks:
+
+    - name: dump all variables for debug purposes
+      debug: var=vars
+      when: 0

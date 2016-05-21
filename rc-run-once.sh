@@ -1,0 +1,4 @@
+#! /bin/bash
+
+# http://kvz.io/blog/2013/01/16/vagrant-tip-keep-virtualbox-guest-additions-in-sync/
+vagrant plugin install vagrant-vbguest

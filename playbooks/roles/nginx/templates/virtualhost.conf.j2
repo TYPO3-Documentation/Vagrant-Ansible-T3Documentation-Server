@@ -1,0 +1,41 @@
+server {
+    listen 80 default_server;
+    server_name {{ main_domain }};
+
+    # Enable gzip compression
+    gzip on;
+
+    root /var/www/{{ main_domain }}/public;
+    index Index.html index.html;
+
+    access_log /var/log/nginx/{{ main_domain }}.log;
+    error_log /var/log/nginx/{{ main_domain }}-error.log error;
+
+    charset utf-8;
+
+    # When no explicit version is given for a translated manual, use the "stable" one
+    if ($request_uri ~ ^/extensions/([^/]+)/(..-..)/(?!([0-9]+|stable|latest))) {
+        return 303 $scheme://$server_name/extensions/$1/$2/stable/$3;
+    }
+
+    # When no explicit version is given, use the "stable" one
+    if ($request_uri ~ /extensions/([^/]+)/(?!([0-9]+|stable|latest|packages|..-..))) {
+        return 303 $scheme://$server_name/extensions/$1/stable/$2;
+    }
+
+    include h5bp/basic.conf;
+
+    location = /favicon.ico { log_not_found off; access_log off; }
+    location = /robots.txt  { log_not_found off; access_log off; }
+
+    location ~ /extensions/[^/]+/packages {
+        autoindex on;
+    }
+
+    {% if _env == "dev" %}
+    # autoindex everything on 'dev' server
+    location / {
+        autoindex on;
+    }
+    {% endif %}
+}

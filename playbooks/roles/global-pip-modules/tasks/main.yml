@@ -1,0 +1,11 @@
+---
+# tasks file for global-pip-modules
+
+- include: upgrade-pygments.yml
+
+- name: install global pip modules
+  pip: name={{ item }} state=latest
+  with_items:
+    - PyYAML
+    - sphinx
+    - virtualenv

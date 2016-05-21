@@ -1,0 +1,19 @@
+---
+# tasks file for locate-python-modules
+
+- name: Find location of global Python modules
+  command: 'python -c "import {{ item }},os; print os.path.split({{ item }}.__file__)[0]"'
+  register: "result"
+  ignore_errors: True
+  with_items:
+    - _mysql
+    - MySQLdb
+    - pygments
+
+- set_fact: location_of_python_module_{{item.item}}=False
+  with_items: "{{result.results}}"
+
+- set_fact: location_of_python_module_{{item.item}}="{{item.stdout}}"
+  when: "{{item.rc}} == 0"
+  with_items: "{{result.results}}"
+

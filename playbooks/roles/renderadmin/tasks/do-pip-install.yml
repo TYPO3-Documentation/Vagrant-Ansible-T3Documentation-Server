@@ -1,0 +1,16 @@
+---
+
+- name: install required python packages
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  pip: name={{ item }} virtualenv={{ renderadmin_venv_path }}
+
+  with_items:
+    - sphinx
+    - pillow
+    - pyyaml
+    - t3SphinxThemeRtd
+    - t3fieldlisttable
+    - t3tablerows
+    - t3targets
+

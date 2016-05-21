@@ -1,0 +1,20 @@
+---
+
+- name: pip uninstall Pygments
+  pip: >
+    name=Pygments
+    virtualenv={{ renderadmin_venv_path }}
+    state=absent
+
+- name: shell install Pygments from setup.py
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  shell: >
+    source {{ renderadmin_venv_path }}/bin/activate;
+    cd {{ renderadmin_repositories_path }}/bitbucket.org/birkenfeld/pygments-main;
+    python setup.py install
+  args:
+    executable: /bin/bash
+
+
+

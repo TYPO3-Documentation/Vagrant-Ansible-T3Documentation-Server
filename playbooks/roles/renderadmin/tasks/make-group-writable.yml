@@ -1,0 +1,16 @@
+---
+
+# make all files and folders group writable
+# include hidden ones
+# that belong to group {{renderadmin_user}}
+# and that are writable for the owner
+# and that are readable for the group
+# and that are not writable for the group
+
+- name: make group writable
+  command: >
+    find /home/{{renderadmin_user}}
+    -name "*.*"
+    -perm -240 ! -perm /020
+    -group {{renderadmin_user}}
+    -exec chmod g+w {} +

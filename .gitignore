@@ -1,0 +1,9 @@
+
+
+*.py[c|o]
+*.retry
+*NOT_VERSIONED*
+/.idea
+/.vagrant*
+/.hibernate*
+

@@ -1,0 +1,61 @@
+---
+
+- name: apt update
+  apt: update_cache=yes  cache_valid_time={{ main_apt_cache_ttl }}
+
+- name: apt install make, xzdec
+  apt: pkg={{ item }}  state=installed
+  with_items:
+    - make
+    - xzdec # used by tlmgr
+
+- name: apt install texlive-base
+  apt: pkg={{ item }}  state=installed
+  with_items:
+    - texlive-base
+
+- name: apt install texlive-latex-*
+  apt: pkg={{ item }}  state=installed
+  with_items:
+    - texlive-latex-base
+    - texlive-latex-recommended
+    - texlive-latex-extra
+
+- name: apt install textlive-fonts-*
+  apt: pkg={{ item }}  state=installed
+  with_items:
+    - texlive-fonts-recommended
+    - texlive-fonts-extra
+
+- name: apt install texlive-lang-*
+  apt: pkg={{ item }}  state=installed
+  with_items:
+    - texlive-lang-all
+
+
+- name: Initialize texmf share for Tex Live
+  become: yes
+  shell: tlmgr --usertree /usr/local/share/texmf init-usertree
+  args:
+    creates: /usr/local/share/texmf/tlpkg/texlive.tlpdb
+    executable: /bin/bash
+
+- name: Install LaTeX package "ec"
+  become: yes
+  shell: tlmgr --usertree /usr/local/share/texmf install ec
+  args:
+    creates: /usr/local/share/texmf/fonts/tfm/jknappen/ec
+    executable: /bin/bash
+
+- name: Install LaTeX package "cm-super"
+  become: yes
+  shell: tlmgr --usertree /usr/local/share/texmf install cm-super
+  args:
+    creates: /usr/local/share/texmf/tex/latex/cm-super
+    executable: /bin/bash
+
+- name: Update TeX Live packages
+  become: yes
+  shell: tlmgr --usertree /usr/local/share/texmf update --all
+  args:
+    executable: /bin/bash

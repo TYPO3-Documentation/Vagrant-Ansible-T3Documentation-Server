@@ -1,0 +1,15 @@
+---
+
+- name: create custom/themes folder for oh-my-zsh
+  file:
+    path:  "{{ elao_ohmyzsh_dir }}/custom/themes"
+    state: directory
+
+- name: copy oh-my-zsh themes
+  template:
+    src:   "themes/{{ item }}.j2"
+    dest:  "{{ elao_ohmyzsh_dir }}/custom/themes/{{ item }}"
+  with_items:
+    - elao-dev.zsh-theme
+    - elao-demo.zsh-theme
+    - elao-prod.zsh-theme

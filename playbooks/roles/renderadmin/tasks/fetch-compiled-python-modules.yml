@@ -1,0 +1,13 @@
+---
+
+- name: copy python modules from global to venv
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  shell: "cp -r {{location_of_python_module_MySQLdb}}* {{renderadmin_venv_path}}/lib/python2.7/site-packages/"
+  when: "\"{{ location_of_python_module_MySQLdb }}\""
+
+- name: copy python modules from global to venv
+  become: yes
+  become_user: "{{renderadmin_user}}"
+  shell: "cp -r {{location_of_python_module__mysql}}* {{renderadmin_venv_path}}/lib/python2.7/site-packages/"
+  when: "\"{{ location_of_python_module__mysql }}\""

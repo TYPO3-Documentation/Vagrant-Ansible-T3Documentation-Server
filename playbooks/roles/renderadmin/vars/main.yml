@@ -1,0 +1,4 @@
+---
+
+renderadmin_venv_path: /home/{{renderadmin_user}}/venv
+renderadmin_repositories_path: /home/{{renderadmin_user}}/Repositories

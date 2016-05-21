@@ -1,0 +1,60 @@
+---
+
+- name: "Install Nginx: update apt cache"
+  apt: update_cache=yes cache_valid_time={{main_apt_cache_ttl}}
+
+- name: "Install Nginx: apt install"
+  apt: pkg=nginx state=installed
+  register: nginxinstalled
+  notify:
+    - Start Nginx
+
+- name: Add H5BP config
+  when: nginxinstalled|success
+  copy: >
+    src=h5bp
+    dest=/etc/nginx
+    owner=root
+    group=root
+
+- name: Disable default site
+  when: nginxinstalled|success
+  file: dest=/etc/nginx/sites-enabled/default state=absent
+
+- name: Add documentation server site config
+  when: nginxinstalled|success
+  register: typo3config
+  template: >
+    src=virtualhost.conf.j2
+    dest=/etc/nginx/sites-available/{{ main_domain }}.conf
+    owner=root
+    group=root
+
+- name: Enable documentation server site config
+  when: typo3config|success
+  file: >
+    src=/etc/nginx/sites-available/{{ main_domain }}.conf
+    dest=/etc/nginx/sites-enabled/{{ main_domain }}.conf
+    state=link
+
+- name: Create web root
+  when: nginxinstalled|success
+  file: >
+    dest=/var/www/{{ main_domain }}/public
+    mode=2775
+    state=directory
+    owner=sphinx
+    group=htdocs
+  notify:
+    - Reload Nginx
+
+- name: Web root permissions
+  when: nginxinstalled|success
+  file: >
+    dest=/var/www/{{ main_domain }}
+    mode=2775 state=directory
+    owner=sphinx
+    group=htdocs
+    recurse=yes
+  notify:
+    - Reload Nginx

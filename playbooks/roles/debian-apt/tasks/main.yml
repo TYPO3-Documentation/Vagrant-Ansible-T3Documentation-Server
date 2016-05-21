@@ -1,0 +1,28 @@
+---
+# tasks file for debian-apt
+
+- name: install apt packages
+  apt: pkg={{ item }} update_cache=yes cache_valid_time={{main_apt_cache_ttl}}
+  become: yes
+  with_items:
+    # general
+    - build-essential
+    - facter
+    - git
+    - mercurial
+    - ncdu
+    - pandoc
+    - php5-cli
+    - python-dev
+    - python-mysqldb
+    - silversearcher-ag
+    - zip
+    - zsh
+
+
+    # Do not use the Debian package 'python-pip. It's old.
+    # - python-pip
+
+    # Python Imaging, requirements for 'pip install pillow'
+    - libjpeg-dev
+    - zlib1g-dev

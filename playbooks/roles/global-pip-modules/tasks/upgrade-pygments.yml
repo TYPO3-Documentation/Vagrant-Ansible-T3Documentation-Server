@@ -1,0 +1,4 @@
+---
+
+- name: upgrade pygments to have the TypoScript lexer
+  pip:  name=hg+https://bitbucket.org/birkenfeld/pygments-main#egg=Package  state=latest

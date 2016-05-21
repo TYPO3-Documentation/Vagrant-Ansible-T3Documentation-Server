@@ -1,0 +1,11 @@
+---
+# tasks file for renderadmin
+
+- include: ensure-user.yml
+- include: fetch-repositories.yml
+- include: do-pip-install.yml
+- include: fetch-compiled-python-modules.yml
+- include: upgrade-pygments.yml
+- include: install-sphinx-contrib.yml
+- include: make-group-writable.yml
+
